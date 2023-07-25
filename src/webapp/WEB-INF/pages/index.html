@@ -1,15 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Users</title>
 </head>
 <body>
-<div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
-</div>
+
+<br/>
+<table class="table_blur">
+    <tr>
+        <th colspan="5" text-align="center">Пользователи</th>
+    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>        </th>
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getId()}">user</a></td>
+        <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
+        <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getSurname()}">user</a></td>
+        <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
+        <td><a th:href="@{/users/{id}/edit(id=${user.getId()})}">
+            <input type="submit" value="Изменить"/></a></td>
+        <td><form th:method="delete" th:action="@{/users/{id}(id=${user.getId()})}">
+            <input type="submit" value="УДАЛИТЬ"/>
+        </form></td>
+
+    </tr>
+</table>
+
+<br/>
+<table>
+    </tr>
+    <td>
+        <form action="/users/new">
+            <button type="submit">Добавить нового пользователя</button>
+        </form>
+    </td>
+
+    <td>
+        <form action="/users">
+            <button type="submit">Показать всех пользователей</button>
+        </form>
+    </td>
+    </tr>
+</table>
 </body>
 </html>
+
+
